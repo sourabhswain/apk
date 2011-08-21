@@ -1,4 +1,4 @@
-package com.vouov.util.security;
+package com.vouov.util;
 
 import com.vouov.util.StringUtils;
 

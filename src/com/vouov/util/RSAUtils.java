@@ -1,4 +1,4 @@
-package com.vouov.util.security;
+package com.vouov.util;
 
 /**
  *RSA加密解密工具类
