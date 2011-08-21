@@ -17,7 +17,13 @@ public class CacheImpl implements ICache<byte[]> {
      * 默认4M缓存
      */
     private long cacheSize = 4 * 1024 * 1024;
-
+    /**
+     * 默认缓存时间2个小时
+     */
+   private long expireTime = 2*3600*1000;
+    /**
+     * 缓存目录
+     */
     private File cacheDIR;
 
     public CacheImpl(Context context){
@@ -34,7 +40,7 @@ public class CacheImpl implements ICache<byte[]> {
      */
     public void put(String key, byte[] value, long time) throws Exception {
         long nTime = new Date().getTime();
-        String md5Key = EncryptUtils.md5_16(key);
+        String md5Key = EncryptUtils.md5(key);
         //查找重复的记录，如果有更新，没有则插入
 
     }
@@ -46,7 +52,7 @@ public class CacheImpl implements ICache<byte[]> {
      * @param value
      */
     public void put(String key, byte[] value) throws Exception {
-        put(key, value, cacheSize);
+        put(key, value, expireTime);
     }
 
     /**

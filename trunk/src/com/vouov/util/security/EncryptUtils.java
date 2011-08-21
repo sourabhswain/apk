@@ -7,11 +7,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by IntelliJ IDEA.
+ * 文本加密解密
  * User: yuml
  * Date: 11-8-6
  * Time: 上午10:24
- * 文本加密解密
  */
 public class EncryptUtils {
     /**
@@ -23,15 +22,14 @@ public class EncryptUtils {
      * @throws NoSuchAlgorithmException
      * @throws UnsupportedEncodingException
      */
-    public static String encrypt(String text, String algorithm) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        String eText = null;
+    public static byte[] encrypt(String text, String algorithm) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        byte[] digest = null;
         if (text != null && !"".equals(text)) {
             MessageDigest md = MessageDigest.getInstance(algorithm);
             md.update(text.getBytes("UTF-8"));
-            byte[] digest = md.digest();
-            eText = StringUtils.byte2Hex(digest);
+            digest = md.digest();
         }
-        return eText;
+        return digest;
     }
 
     /**
@@ -41,21 +39,17 @@ public class EncryptUtils {
      * @return
      */
     public static String md5(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        return encrypt(text, "MD5");
+        return StringUtils.byte2Hex(encrypt(text, "MD5"));
     }
 
     /**
-     * MD5摘要 生成16位
+     * MD5摘要 生成最短字符串
      *
      * @param text
      * @return
      */
-    public static String md5_16(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        String s = encrypt(text, "MD5");
-        if (s != null && s.length() > 0) {
-            s = s.substring(8, 24);
-        }
-        return s;
+    public static String md5_short(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        return StringUtils.byte2Short(encrypt(text,"MD5"));
     }
 
     /**
@@ -67,6 +61,6 @@ public class EncryptUtils {
      * @throws UnsupportedEncodingException
      */
     public static String sha(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        return encrypt(text, "SHA-1");
+        return StringUtils.byte2Hex(encrypt(text, "SHA-1"));
     }
 }
