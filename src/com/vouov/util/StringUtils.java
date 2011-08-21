@@ -23,6 +23,24 @@ public class StringUtils {
         return sb.toString();
     }
 
+   /* *//**
+     * 二进制byte转成最短字符串
+     *
+     * @param bytes
+     * @return
+     *//*
+    public static String byte2Short(byte[] bytes) {
+        String base = "abcdefghijklmnopqrstuvwxyz123456";
+        //String base = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIGKLMNOPQRSTUVWXYZ";
+        StringBuilder sb = new StringBuilder();
+        if (bytes != null) {
+            for (byte b : bytes) {
+                sb.append(String.format("%02x", b));
+            }
+        }
+        return sb.toString();
+    }*/
+
     /**
      * 判断字符串是否为空
      * @param text

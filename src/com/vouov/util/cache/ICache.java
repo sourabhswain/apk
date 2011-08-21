@@ -1,11 +1,10 @@
 package com.vouov.util.cache;
 
 /**
- * Created by IntelliJ IDEA.
+ * 缓存接口
  * User: yuml
  * Date: 11-8-6
  * Time: 上午9:16
- * To change this template use File | Settings | File Templates.
  */
 public interface ICache<T>{
     /**
