@@ -6,11 +6,10 @@ import java.util.Comparator;
 import java.util.Date;
 
 /**
- * Created by IntelliJ IDEA.
+ * 文件操作类
  * User: yuml
  * Date: 11-8-7
  * Time: 上午10:14
- * To change this template use File | Settings | File Templates.
  */
 public class FileUtils {
     /**

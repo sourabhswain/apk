@@ -6,11 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by IntelliJ IDEA.
+ * 日期工具类
  * User: yuml
  * Date: 11-7-29
  * Time: 下午9:17
- * 日期工具类
  */
 public class DateUtils {
 

@@ -6,6 +6,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 /**
+ * 显示工具类
  * User: yuminglong
  * Date: 11-8-8
  * Time: 下午11:50
