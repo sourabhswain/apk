@@ -1,11 +1,10 @@
 package com.vouov.util;
 
 /**
- * Created by IntelliJ IDEA.
+ * 字符操作工具类
  * User: yuml
  * Date: 11-8-7
  * Time: 上午8:09
- * To change this template use File | Settings | File Templates.
  */
 public class StringUtils {
     /**

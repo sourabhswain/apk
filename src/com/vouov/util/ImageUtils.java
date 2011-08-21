@@ -8,11 +8,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * Created by IntelliJ IDEA.
+ * 图片操作工具类
  * User: yuml
  * Date: 11-8-7
  * Time: 下午12:45
- * To change this template use File | Settings | File Templates.
  */
 public class ImageUtils {
     /**
