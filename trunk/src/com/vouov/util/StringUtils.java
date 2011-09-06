@@ -53,4 +53,11 @@ public class StringUtils {
             return false;
         }
     }
+
+    public static String null2Blank(String value){
+        if(value==null){
+            return "";
+        }
+        return value;
+    }
 }

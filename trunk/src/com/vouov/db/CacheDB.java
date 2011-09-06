@@ -88,8 +88,20 @@ public class CacheDB extends SQLiteOpenHelper {
         return cache;
     }
 
-    public void addCache(Cache cache){
-
+    public long addCache(Cache cache){
+        long newId = 0;
+        if(cache!=null){
+            Cache cache1 = null;
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor cursor = db. query(TABLE_NAME, COLUMNS, CACHE_KEY+"=?", new String[]{cache.getKey()}, null, null, null);
+            if(cursor.moveToNext()){
+                cache1 = cursor2Cache(cursor);
+            }
+           /* if(){
+                db.insert(TABLE_NAME, )
+            }*/
+        }
+        return newId;
     }
 
     public List<Cache> getExpireCaches(){
