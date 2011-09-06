@@ -48,9 +48,9 @@ public class EncryptUtils {
      * @param text
      * @return
      */
-    public static String md5_short(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    /*public static String md5_short(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         return StringUtils.byte2Short(encrypt(text,"MD5"));
-    }
+    }*/
 
     /**
      * sha-1加密

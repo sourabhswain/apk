@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.vouov.app"
+      package="com.vouov.app.activity"
       android:versionCode="1"
       android:versionName="1.0">
     <application android:label="@string/app_name" android:icon="@drawable/icon">
-        <activity android:name=".activity.HomeActivity"
+        <activity android:name=".HomeActivity"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
