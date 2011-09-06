@@ -3,6 +3,8 @@
  */
 package com.vouov.exception;
 
+import com.vouov.enums.SVExceptionStatus;
+
 /**
  * App 抛出的异常类，主要区别于系统的错误
  * @author Minglong.Yu
@@ -22,6 +24,26 @@ public class SVException extends Exception {
 		super(detailMessage);
 		this.code = code;
 	}
+
+    public SVException(int code, Throwable throwable){
+        super(throwable);
+        this.code = code;
+    }
+
+    public SVException(Throwable throwable){
+        super(throwable);
+        this.code = SVExceptionStatus.FAILED.getCode();
+    }
+
+    public SVException(String detailMessage){
+        super(detailMessage);
+        this.code = SVExceptionStatus.FAILED.getCode();
+    }
+
+    public SVException(){
+        super();
+        this.code = SVExceptionStatus.FAILED.getCode();
+    }
 
 	public int getCode() {
 		return code;

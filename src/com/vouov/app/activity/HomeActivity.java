@@ -1,8 +1,9 @@
-package com.vouov.app;
+package com.vouov.app.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import com.vouov.R;
+import com.vouov.app.R;
 
 public class HomeActivity extends Activity
 {
