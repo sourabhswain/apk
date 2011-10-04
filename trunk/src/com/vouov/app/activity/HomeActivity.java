@@ -23,15 +23,9 @@ public class HomeActivity extends Activity
             json.put("provider", "provider1");
             json.put("longitude", 1.10);
             json.put("latitude", 2.20);
-            MyGEO myGEO = HttpUtils.json2Bean(json, MyGEO.class);
-            Log.v("YUML","provider = "+myGEO.getProvider()+",longitude = "+myGEO.getLongitude()+",latitude = "+myGEO.getLatitude());
+            //MyGEO myGEO = HttpUtils.json2Bean(json, MyGEO.class);
+            //Log.v("YUML","provider = "+myGEO.getProvider()+",longitude = "+myGEO.getLongitude()+",latitude = "+myGEO.getLatitude());
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (SVException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
         Log.v("YUML","******************************************");
