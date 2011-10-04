@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.vouov.cache.Cache;
+import com.vouov.exception.SVException;
+import com.vouov.util.DBUtils;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
  * Time: 上午12:56
  * Version: 1.0.0
  */
-public class CacheDB extends SQLiteOpenHelper {
+public class CacheDB extends SQLiteOpenHelper implements RowHandler<Cache>{
     private final static String TAG = "CacheDB";
 
     private final static int DB_VERSION = 1;
@@ -34,9 +36,6 @@ public class CacheDB extends SQLiteOpenHelper {
             + CACHE_KEY + " TEXT UNIQUE," + CACHE_FILE_NAME + " TEXT," + CACHE_LAST_MODIFIED + " INTEGER,"
             + CACHE_EXPIRE + " INTEGER," + CACHE_SIZE + " INTEGER," + CACHE_COUNT + " INTEGER);";
 
-    private final static String[] COLUMNS = new String[]{CACHE_ID, CACHE_KEY, CACHE_FILE_NAME,
-            CACHE_LAST_MODIFIED, CACHE_EXPIRE, CACHE_SIZE, CACHE_COUNT};
-
     public CacheDB(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -54,49 +53,27 @@ public class CacheDB extends SQLiteOpenHelper {
     }
 
     /**
-     * 把游标对象转换Cahce
-     * @param cursor
-     * @return
-     */
-    private Cache cursor2Cache(Cursor cursor) {
-        Cache cache = new Cache();
-        cache.setId(cursor.getLong(0));
-        cache.setKey(cursor.getString(1));
-        cache.setFileName(cursor.getString(2));
-        cache.setLastModified(cursor.getLong(3));
-        cache.setExpire(cursor.getLong(4));
-        cache.setSize(cursor.getLong(5));
-        cache.setCount(cursor.getInt(6));
-        return cache;
-    }
-    /**
      * 根据key获取记录
      *
      * @param key
      * @return
      */
-    public Cache getByKey(String key) {
+    public Cache getByKey(String key) throws SVException {
         Cache cache = null;
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, COLUMNS, CACHE_KEY + "=?", new String[]{key}, null, null, null);
-        if (cursor.getCount() > 0) {
-            while (cursor.moveToNext()) {
-                cache = cursor2Cache(cursor);
-            }
-        }
+        Cursor cursor = db.query(TABLE_NAME, null, CACHE_KEY + "=?", new String[]{key}, null, null, null);
+        cache = DBUtils.selectOne(this, cursor);
         cursor.close();
         return cache;
     }
 
-    public long addCache(Cache cache){
+    public long addCache(Cache cache) throws SVException {
         long newId = 0;
         if(cache!=null){
             Cache cache1 = null;
             SQLiteDatabase db = getReadableDatabase();
-            Cursor cursor = db. query(TABLE_NAME, COLUMNS, CACHE_KEY+"=?", new String[]{cache.getKey()}, null, null, null);
-            if(cursor.moveToNext()){
-                cache1 = cursor2Cache(cursor);
-            }
+            Cursor cursor = db.query(TABLE_NAME, null, CACHE_KEY + "=?", new String[]{cache.getKey()}, null, null, null);
+            cache1 = DBUtils.selectOne(this, cursor);
            /* if(){
                 db.insert(TABLE_NAME, )
             }*/
@@ -112,4 +89,15 @@ public class CacheDB extends SQLiteOpenHelper {
         return null;
     }
 
+    public Cache rowProcess(Cursor cursor) {
+        Cache cache = new Cache();
+        cache.setId(DBUtils.getLong(cursor, CACHE_ID));
+        cache.setKey(DBUtils.getString(cursor, CACHE_KEY));
+        cache.setFileName(DBUtils.getString(cursor, CACHE_FILE_NAME));
+        cache.setLastModified(DBUtils.getLong(cursor, CACHE_LAST_MODIFIED));
+        cache.setExpire(DBUtils.getLong(cursor, CACHE_EXPIRE));
+        cache.setSize(DBUtils.getLong(cursor, CACHE_EXPIRE));
+        cache.setCount(DBUtils.getInt(cursor, CACHE_COUNT));
+        return cache;
+    }
 }
